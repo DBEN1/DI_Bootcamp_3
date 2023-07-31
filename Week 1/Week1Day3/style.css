@@ -1,0 +1,46 @@
+* {
+    font-family: 'Oswald', sans-serif;
+}
+
+#name { 
+
+}
+.DanPic { 
+    width: 250px;
+    height: 250px;
+
+} 
+
+ #image {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    
+} 
+
+#Nameandimage {
+    box-sizing: border-box;
+    display: flex;
+     justify-content: space-between; 
+     border: 1px solid black;
+
+} 
+
+ #Name {
+    flex: 1; */
+}
+
+ #image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50px;
+align-items: center;*/
+     align-items: baseline; }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}

@@ -5,7 +5,7 @@ from psycopg2 import sql
 conn = psycopg2.connect(
     dbname="Poker", 
     user="postgres", 
-    password="Mypassword",
+    password="IwPbHxP1!",
     host="localhost",
     port="5432"
 )
@@ -14,7 +14,7 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 while True:
-    hand = input("Enter your starting hand\nFor example: if Ace-King Suited, type AKs: ")
+    hand = input("Enter your starting hand\nFor example: if Ace-King Suited, type AKs \n If not, AKo: ")
 
     # Query database to get hand details
     cur.execute(sql.SQL("SELECT * FROM public.poker_hands WHERE hand = %s"), [hand])
@@ -45,4 +45,4 @@ while True:
 
     # Extract the corresponding probability from the database
     prob = hand_details[num_players - 1]  # Adjusting index to match player count
-    print(f"The probability of this hand with {num_players} players at the table is {prob}")
+    print(f"The probability of this hand winning with {num_players} players at the table is {prob}")

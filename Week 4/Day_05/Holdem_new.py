@@ -5,7 +5,7 @@ from psycopg2 import sql
 conn = psycopg2.connect(
     dbname="Poker", 
     user="postgres", 
-    password="IwPbHxP1!",
+    password="####",
     host="localhost",
     port="5432"
 )

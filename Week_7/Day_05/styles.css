@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('path_to_background_image.jpg');
+    background-size: cover;
+}
+
+#searchBox {
+    width: 300px;
+    padding: 10px;
+    margin: 20px auto;
+    display: block;
+}
+
+#robotsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.robot-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.robot-image {
+    width: 100%;
+}
+
+.robot-name {
+    font-weight: bold;
+}

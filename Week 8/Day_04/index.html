@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Web App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Add your CSS styling here */
+    </style>
+</head>
+<body>
+
+<button id="fetchData">Fetch Random Character</button>
+
+<div id="loading" style="display: none;">
+    <i class="fas fa-spinner fa-spin"></i> Loading...
+</div>
+
+<div id="characterInfo" style="display: none;">
+    <h2 id="name"></h2>
+    <p>Height: <span id="height"></span></p>
+    <p>Gender: <span id="gender"></span></p>
+    <p>Birth Year: <span id="birthYear"></span></p>
+    <p>Home World: <span id="homeWorld"></span></p>
+</div>
+
+<div id="error" style="display: none;">
+    Error fetching data. Please try again.
+</div>
+
+<script>
+const fetchDataBtn = document.getElementById('fetchData');
+const loadingDiv = document.getElementById('loading');
+const characterInfoDiv = document.getElementById('characterInfo');
+const errorDiv = document.getElementById('error');
+
+function displayData(data) {
+    document.getElementById('name').textContent = data.name;
+    document.getElementById('height').textContent = data.height;
+    document.getElementById('gender').textContent = data.gender;
+    document.getElementById('birthYear').textContent = data.birth_year;
+    // Fetching home world data requires another API call
+    fetch(data.homeworld)
+        .then(response => response.json())
+        .then(homeWorldData => {
+            document.getElementById('homeWorld').textContent = homeWorldData.name;
+            loadingDiv.style.display = 'none';
+            characterInfoDiv.style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error fetching home world:', error);
+            loadingDiv.style.display = 'none';
+            errorDiv.style.display = 'block';
+        });
+}
+
+fetchDataBtn.addEventListener('click', function() {
+    const randomId = Math.floor(Math.random() * 83) + 1; // Random number between 1 and 83
+    const apiUrl = `https://www.swapi.tech/api/people/${randomId}/`;
+
+    characterInfoDiv.style.display = 'none';
+    errorDiv.style.display = 'none';
+    loadingDiv.style.display = 'block';
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => displayData(data.result.properties))
+        .catch(error => {
+            console.error('Error fetching character:', error);
+            loadingDiv.style.display = 'none';
+            errorDiv.style.display = 'block';
+        });
+});
+</script>
+
+</body>
+</html>

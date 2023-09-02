@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+</head>
+<body>
+
+<form id="userForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+    
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <br><br>
+    
+    <input type="submit" value="Send">
+</form>
+
+<h3>Output:</h3>
+<pre id="output"></pre>
+
+<script>
+document.getElementById('userForm').addEventListener('submit', function(event) {
+    // Prevent the form from submitting the traditional way
+    event.preventDefault();
+
+    // Retrieve data from the inputs
+    const name = document.getElementById('name').value;
+    const lastName = document.getElementById('lastName').value;
+
+    // Create a JSON object
+    const userData = {
+        name: name,
+        lastName: lastName
+    };
+
+    // Convert the object to a JSON string
+    const jsonString = JSON.stringify(userData, null, 2); // The "2" here is for formatting with 2 spaces
+
+    // Append the JSON string to the DOM
+    document.getElementById('output').textContent = jsonString;
+});
+</script>
+
+</body>
+</html>

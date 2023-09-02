@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giphy API Random</title>
+</head>
+<body>
+
+<form id="gifForm">
+    <input type="text" id="category" placeholder="Enter gif category">
+    <button type="submit">Fetch Gif</button>
+</form>
+
+<button id="deleteAll">DELETE ALL</button>
+
+<div id="gifContainer"></div>
+
+<script>
+document.getElementById('gifForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const category = document.getElementById('category').value;
+    const giphyURL = `https://api.giphy.com/v1/gifs/random?tag=${category}&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My`;
+
+    fetch(giphyURL)
+        .then(response => response.json())
+        .then(data => {
+            const gifURL = data.data.images.original.url;
+
+            const gifElement = document.createElement('div');
+            gifElement.innerHTML = `
+                <img src="${gifURL}" alt="${category} gif">
+                <button class="delete">DELETE</button>
+            `;
+
+            document.getElementById('gifContainer').appendChild(gifElement);
+        })
+        .catch(error => console.error('Error fetching gif:', error));
+});
+
+document.getElementById('gifContainer').addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete')) {
+        event.target.parentElement.remove();
+    }
+});
+
+document.getElementById('deleteAll').addEventListener('click', function() {
+    document.getElementById('gifContainer').innerHTML = '';
+});
+</script>
+
+</body>
+</html>
